@@ -16,10 +16,10 @@ import android.os.Looper
 import android.telephony.TelephonyManager
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import com.autocaller.TaskAction.Companion.EXTRA_CURRENT
-import com.autocaller.TaskAction.Companion.EXTRA_MSG
-import com.autocaller.TaskAction.Companion.EXTRA_STATE
-import com.autocaller.TaskAction.Companion.EXTRA_TOTAL
+import com.autocaller.TaskAction.EXTRA_CURRENT
+import com.autocaller.TaskAction.EXTRA_MSG
+import com.autocaller.TaskAction.EXTRA_STATE
+import com.autocaller.TaskAction.EXTRA_TOTAL
 import kotlinx.coroutines.*
 
 /**
