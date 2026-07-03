@@ -1,6 +1,7 @@
 package com.autocaller
 
 import android.accessibilityservice.AccessibilityService
+import android.accessibilityservice.AccessibilityService.GLOBAL_ACTION_END_CALL
 import android.accessibilityservice.GestureDescription
 import android.content.Intent
 import android.graphics.Path
@@ -107,19 +108,13 @@ class CallAccessibilityService : AccessibilityService() {
         } else {
             Log.w(TAG, "Could not find end-call button, trying coordinate click...")
 
-            // 方案 C：在屏幕底部中央模拟点击（红色挂断按钮通常在那里）
-            val display = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                display
-            } else {
-                @Suppress("DEPRECATION")
-                windowManager?.defaultDisplay
-            }
-
-            if (display != null) {
+            // 方案 C：在屏幕底部中央模拟点击
+            val disp = display
+            if (disp != null) {
                 val size = android.graphics.Point()
-                display.getRealSize(size)
+                disp.getRealSize(size)
                 val x = size.x / 2f
-                val y = size.y * 0.85f  // 屏幕底部 85% 位置
+                val y = size.y * 0.85f
 
                 Log.i(TAG, "Tapping at ($x, $y)")
                 tapAt(x, y)

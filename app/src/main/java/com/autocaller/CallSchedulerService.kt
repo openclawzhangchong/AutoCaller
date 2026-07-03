@@ -51,6 +51,9 @@ class CallSchedulerService : Service() {
         const val CHANNEL_ID = "call_scheduler_channel"
         const val NOTIFICATION_ID = 1001
 
+        const val ACTION_START = "com.autocaller.ACTION_START"
+        const val ACTION_STOP = "com.autocaller.ACTION_STOP"
+
         fun start(context: Context, config: CallConfig) {
             val intent = Intent(context, CallSchedulerService::class.java).apply {
                 putExtra("config", config)
@@ -297,10 +300,6 @@ class CallSchedulerService : Service() {
         registerReceiver(phoneStateReceiver, filter)
     }
 
-    // ── Action 常量 ───────────────────────────────────────────
+    // ── Action 常量（已迁移到 public companion object）──
 
-    private companion object {
-        const val ACTION_START = "com.autocaller.ACTION_START"
-        const val ACTION_STOP = "com.autocaller.ACTION_STOP"
-    }
 }
