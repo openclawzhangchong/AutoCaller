@@ -61,21 +61,28 @@ class CallAccessibilityService : AccessibilityService() {
     }
 
     /** 执行挂断 */
+    @Suppress("DEPRECATION")
     private fun hangUp() {
         Log.i(TAG, "Attempting to hang up...")
 
-        // 方案 A：全局挂断动作（Android 9+, 需要无障碍服务开启）
+        // 方案 A：全局挂断动作（Android 9+）
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            @Suppress("DEPRECATION")
-            val success = performGlobalAction(AccessibilityService.GLOBAL_ACTION_END_CALL)
-            Log.i(TAG, "GLOBAL_ACTION_END_CALL: success=$success")
-            if (success) {
-                callConnectTime = 0L
-                return
+            try {
+                val endCallAction = Class.forName("android.accessibilityservice.AccessibilityService")
+                    .getField("GLOBAL_ACTION_END_CALL")
+                    .getInt(null)
+                val success = performGlobalAction(endCallAction)
+                Log.i(TAG, "GLOBAL_ACTION_END_CALL via reflection: success=$success")
+                if (success) {
+                    callConnectTime = 0L
+                    return
+                }
+            } catch (e: Exception) {
+                Log.w(TAG, "Failed to use GLOBAL_ACTION_END_CALL: ${e.message}")
             }
         }
 
-        // 方案 B：在界面中找到挂断按钮并点击
+        // 方案 B：在界面中找到红色挂断按钮并点击
         val dialerRoot = rootInActiveWindow ?: run {
             Log.w(TAG, "Root node is null")
             return
