@@ -230,9 +230,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="自动挂断需要开启无障碍服务。\n\n" +
-                                "请在系统设置中搜索「无障碍」→ 找到「自动拨号器」→ 开启开关。\n\n" +
-                                "首次使用请先点击下方按钮跳转到无障碍设置页面。"
+                        android:text="自动挂断需要开启无障碍服务。\n\n请在系统设置中搜索「无障碍」→ 找到「自动拨号器」→ 开启开关。\n\n首次使用请先点击下方按钮跳转到无障碍设置页面。"
                         android:textSize="13sp"
                         android:lineSpacingExtra="3dp"
                         android:paddingBottom="8dp" />
