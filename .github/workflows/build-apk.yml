@@ -27,12 +27,13 @@ jobs:
 
       - name: 编译 Debug APK
         run: |
-          cd auto-caller
-          chmod +x gradlew 2>/dev/null
+          # 授权 gradlew
+          chmod +x gradlew 2>/dev/null || true
+          # 编译
           ./gradlew assembleDebug
 
       - name: 上传 APK
         uses: actions/upload-artifact@v4
         with:
           name: AutoCaller-APK
-          path: auto-caller/app/build/outputs/apk/debug/*.apk
+          path: app/build/outputs/apk/debug/*.apk
