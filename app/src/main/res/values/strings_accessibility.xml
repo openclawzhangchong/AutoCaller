@@ -1,0 +1,3 @@
+<resources>
+    <string name="accessibility_service_desc">用于自动检测通话状态和挂断电话。开启后，自动拨号器可以在通话到达指定时长后自动挂断。</string>
+</resources>
